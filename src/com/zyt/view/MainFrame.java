@@ -13,9 +13,7 @@ public class MainFrame extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		out.println("Welcome~<br />");
-		
-		out.println("<a href='UsersManager/LoginServlet'>Go back and log in again</a>");
+		out.print("<img src='imgs/hello_logo.jpg' />Welcome XXX <a href='UsersManager/LoginServlet'>Go back and log in again</a><hr/>");
 		
 		out.println("<h3>Please select your operation</h3>");
 		out.println("<a href='/UsersManager/ManageUsers'>Manage users</a> <br />");

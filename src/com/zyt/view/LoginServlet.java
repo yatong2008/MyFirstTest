@@ -14,6 +14,8 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
+		out.print("<img src='imgs/hello_logo.jpg' /><hr/>");
+		
 		out.println("<h1>User Login</h1>");
 		out.println("<form action='/UsersManager/LoginControlServlet' method='post'>");
 		out.println("User ID: <input type='text' name='username' /><br/>");
@@ -29,6 +31,8 @@ public class LoginServlet extends HttpServlet {
 		if (errID != null) {
 			out.print("<font color='red'>" + errID + "</font>");
 		}
+		
+		out.print("<hr/><img src='imgs/hellokitty_logo.jpg' />");
 	}
 
 
