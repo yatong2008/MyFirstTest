@@ -22,8 +22,7 @@ public class LoginControlServlet extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		
-		int username = Integer.parseInt(request.getParameter("username"));
-		String password = request.getParameter("password");
+		
 		
 //		System.out.println("here");
 		
@@ -33,6 +32,10 @@ public class LoginControlServlet extends HttpServlet {
 		ResultSet rs = null;
 		
 		try {
+			int username = Integer.parseInt(request.getParameter("username"));
+			String password = request.getParameter("password");
+			
+			
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jps_cms","root", "911922");
 //			out.println("connect successful");
@@ -45,19 +48,52 @@ public class LoginControlServlet extends HttpServlet {
 			rs = ps.executeQuery();
 			
 			if(rs.next()) {
-				System.out.println("true");
+//				System.out.println("true");
 //				response.sendRedirect("/UsersManager/MainFrame");
 				request.getRequestDispatcher("MainFrame").forward(request, response);
 			} else {
-				System.out.println("fuck");
+//				System.out.println("fuck");
 //				response.sendRedirect("/UsersManager/LoginServlet");
+				request.setAttribute("err", "Your Login ID or password is incorrect!");
 				request.getRequestDispatcher("LoginServlet").forward(request, response);
 			}
 			
 			
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			request.setAttribute("ID_err", "Your ID is not a number");
+			request.getRequestDispatcher("LoginServlet").forward(request, response);
+		} finally {
+			if(rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				rs = null;
+			}
+			
+			if(ps!=null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				ps = null;
+			}
+			
+			if (con!=null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				con = null;
+			}
+			
 		}
 		
 		

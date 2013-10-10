@@ -20,6 +20,15 @@ public class LoginServlet extends HttpServlet {
 		out.println("Password: <input type='password' name='password' /><br/>");
 		out.println("<input type='submit' value='Login' /><br/>");
 		out.println("</form>");
+		String errInfo = (String)request.getAttribute("err");
+		if (errInfo != null) {
+			out.print("<font color='red'>" + errInfo + "</font>");
+		}
+		
+		String errID = (String)request.getAttribute("ID_err");
+		if (errID != null) {
+			out.print("<font color='red'>" + errID + "</font>");
+		}
 	}
 
 

@@ -20,7 +20,8 @@
     <url-pattern>/LoginControlServlet</url-pattern>
   </servlet-mapping>
   
- <servlet>
+  
+  <servlet>
     <servlet-name>MainFrame</servlet-name>
     <servlet-class>com.zyt.view.MainFrame</servlet-class>
   </servlet>
@@ -28,6 +29,18 @@
     <servlet-name>MainFrame</servlet-name>
     <url-pattern>/MainFrame</url-pattern>
   </servlet-mapping>
+  
+  
+  <servlet>
+    <servlet-name>ManageUsers</servlet-name>
+    <servlet-class>com.zyt.view.ManageUsers</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ManageUsers</servlet-name>
+    <url-pattern>/ManageUsers</url-pattern>
+  </servlet-mapping>
+  
+  
   
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
