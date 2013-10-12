@@ -22,8 +22,6 @@ public class MainFrame extends HttpServlet {
 		out.println("<a href=''>Log out</a> <br />");
 		
 		
-		
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
