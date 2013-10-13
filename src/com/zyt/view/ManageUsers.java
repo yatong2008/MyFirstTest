@@ -2,17 +2,15 @@ package com.zyt.view;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.zyt.domain.User;
+import com.zyt.service.userService;
 
 public class ManageUsers extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -27,11 +25,6 @@ public class ManageUsers extends HttpServlet {
 
 		out.print("<h1>Manage Users</h1>");
 		
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		
-		
 		int pageNow = 1;
 		String sPageNow = request.getParameter("pageNow");
 			if (!"".equals(sPageNow))
@@ -43,37 +36,22 @@ public class ManageUsers extends HttpServlet {
 		int rowCount;
 		
 		try {
-			//load driver
-			Class.forName("com.mysql.jdbc.Driver");
-			//get connection
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jps_cms","root", "911922");
 			
-			//get the number of the row
-			ps = con.prepareStatement("SELECT count(*) FROM users");
-			rs = ps.executeQuery();
-			rs.next();
-			rowCount = rs.getInt(1);
+			userService us= new userService();
+
+			pageCount = us.getPageCount(pageSize);//(rowCount - 1) / pageSize + 1;
 			
-			pageCount = (rowCount - 1) / pageSize + 1;
-			
-			if(pageNow > pageCount)
-				pageNow = pageCount;
-			
-			ps = con.prepareStatement("SELECT * FROM users limit ?, ?");
-			
-			ps.setInt(1, (pageNow - 1) * pageSize);
-			ps.setInt(2, pageSize);
-			
-			rs = ps.executeQuery();
+			ArrayList<User> al = us.getUsersByPage(pageNow, pageSize);
 			
 			out.print("<table border=1px bordercolor=green cellspacing=0>");
 			out.print("<tr><th>ID</th><th>User name</th><th>email</th><th>level</th></tr>");
-			while (rs.next())  {
-				out.print("<tr><td>"+ rs.getInt(1) +
-						"</td><td>"+ rs.getString(2) +
-						"</td><td>"+ rs.getString(3) +
-						"</td><td>"+ rs.getString(4) +
-						"</t></tr>");
+
+			for (User u:al){
+				out.print("<tr><td>"+ u.getId() +
+					"</td><td>"+ u.getUsername() +
+					"</td><td>"+ u.getEmail() +
+					"</td><td>"+ u.getGrade()  +
+					"</t></tr>");
 			}
 			
 			out.print("</table>");
@@ -93,37 +71,7 @@ public class ManageUsers extends HttpServlet {
 			out.println("jump to <input type='text' id='pageNow' name='pageNow'/><input type='button' onClick='gotoPage()' value='Jump'>");
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			if(rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				rs = null;
-			}
-			
-			if(ps!=null) {
-				try {
-					ps.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				ps = null;
-			}
-			
-			if (con!=null) {
-				try {
-					con.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				con = null;
-			}
-		}
+		} 
 		out.print("<hr/><img src='imgs/hellokitty_logo.jpg' />");
 
 		
