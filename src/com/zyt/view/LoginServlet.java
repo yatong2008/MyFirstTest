@@ -18,7 +18,7 @@ public class LoginServlet extends HttpServlet {
 		
 		out.println("<h1>User Login</h1>");
 		out.println("<form action='/UsersManager/LoginControlServlet' method='post'>");
-		out.println("User ID: <input type='text' name='username' /><br/>");
+		out.println("User ID: <input type='text' name='id' /><br/>");
 		out.println("Password: <input type='password' name='password' /><br/>");
 		out.println("<input type='submit' value='Login' /><br/>");
 		out.println("</form>");
