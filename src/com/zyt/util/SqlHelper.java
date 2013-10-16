@@ -41,6 +41,8 @@ public class SqlHelper {
 			username = pp.getProperty("username");
 			driver = pp.getProperty("driver");
 			password = pp.getProperty("password");
+			
+			System.out.println(password);
 
 			Class.forName(driver);
 		} catch (Exception e) {
@@ -178,9 +180,6 @@ public class SqlHelper {
 
 	}
 
-	// 先写一个update、delete、insert
-	// sql格式：update 表名 set 字段名 =？where 字段=？
-	// parameter神应该是（”abc“,23）
 	public static void executeUpdate(String sql, String[] parameters) {
 		try {
 			ct = getConnection();

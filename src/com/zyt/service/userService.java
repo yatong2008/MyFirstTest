@@ -15,6 +15,24 @@ import com.zyt.util.SqlHelper;
 public class userService {
 	
 	
+	public boolean delUser(String id) {
+		boolean b = true;
+		
+		String sql = "DELETE FROM users WHERE ID = ?";
+		
+		String[] parameters = {id};
+		
+		try {
+			SqlHelper.executeUpdate(sql, parameters);
+		} catch (Exception e) {
+			b = false;
+			// TODO: handle exception
+		}
+		
+		return b;
+	}
+	
+	
 	public int getPageCount(int pageSize) {
 		String sql = "SELECT count(*) FROM users";
 		

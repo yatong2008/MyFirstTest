@@ -18,7 +18,8 @@ public class ManageUsers extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		out.println("<script type='text/javascript' language='javascript'>");
-		out.println("function gotoPage(){var pageNow=document.getElementById('pageNow'); window.open('?pageNow='+pageNow.value,'_self')}");
+		out.println("function gotoPage(){var pageNow=document.getElementById('pageNow'); window.open('?pageNow='+pageNow.value,'_self')}"
+				+ "function confirmDel(){return  window.confirm('Are you sure to delete the client? ');} ");
 		out.println("</script>");
 		
 		out.println("<img src='imgs/hello_logo.jpg' />Welcome XXX <a href='MainFrame'>Go back to the main page</a><a href='LoginServlet'>Log out</a><hr/>");
@@ -44,14 +45,16 @@ public class ManageUsers extends HttpServlet {
 			ArrayList<User> al = us.getUsersByPage(pageNow, pageSize);
 			
 			out.print("<table border=1px bordercolor=green cellspacing=0>");
-			out.print("<tr><th>ID</th><th>User name</th><th>email</th><th>level</th></tr>");
+			out.print("<tr><th>ID</th><th>User name</th><th>email</th><th>level</th><th>op1</th><th>op2</th></tr>");
 
 			for (User u:al){
 				out.print("<tr><td>"+ u.getId() +
 					"</td><td>"+ u.getUsername() +
 					"</td><td>"+ u.getEmail() +
 					"</td><td>"+ u.getGrade()  +
-					"</t></tr>");
+					"</td><td><a onClick='return confirmDel(); ' href='/UsersManager/DelClServlet?id="+ u.getId() +"'>Delete user </a>" +
+					"</td><td><a href=''>Modify user</a>" +
+					"</td></tr>");
 			}
 			
 			out.print("</table>");
