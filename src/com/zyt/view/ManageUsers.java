@@ -52,12 +52,12 @@ public class ManageUsers extends HttpServlet {
 					"</td><td>"+ u.getUsername() +
 					"</td><td>"+ u.getEmail() +
 					"</td><td>"+ u.getGrade()  +
-					"</td><td><a onClick='return confirmDel(); ' href='/UsersManager/DelClServlet?id="+ u.getId() +"'>Delete user </a>" +
-					"</td><td><a href=''>Modify user</a>" +
+					"</td><td><a onClick='return confirmDel(); ' href='/UsersManager/UserClServlet?type=del&id="+ u.getId() +"'>Delete user </a>" +
+					"</td><td><a href='/UsersManager/UserClServlet?type=gotoUpdView&id="+ u.getId() +"'>Modify user</a>" +
 					"</td></tr>");
 			}
 			
-			out.print("</table>");
+			out.print("</table>"); 
 			
 			if (pageNow != 1)
 				out.print("<a href='?pageNow=" + (pageNow - 1) +"'>Previous page<a>");

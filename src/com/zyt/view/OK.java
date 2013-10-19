@@ -15,7 +15,7 @@ public class OK extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
-		out.print("SUCCESS<br>");
+		out.print(request.getAttribute("info") + "<br>");
 		out.print("<a href=/UsersManager/MainFrame>GO Back</a>");
 	}
 

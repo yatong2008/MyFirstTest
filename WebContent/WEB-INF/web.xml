@@ -34,14 +34,13 @@
     <url-pattern>/ManageUsers</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>DelClServlet</servlet-name>
-    <servlet-class>com.zyt.controller.DelClServlet</servlet-class>
+    <servlet-name>UserClServlet</servlet-name>
+    <servlet-class>com.zyt.controller.UserClServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>DelClServlet</servlet-name>
-    <url-pattern>/DelClServlet</url-pattern>
+    <servlet-name>UserClServlet</servlet-name>
+    <url-pattern>/UserClServlet</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>OK</servlet-name>
     <servlet-class>com.zyt.view.OK</servlet-class>
@@ -50,8 +49,6 @@
     <servlet-name>OK</servlet-name>
     <url-pattern>/OK</url-pattern>
   </servlet-mapping>
-  
-  
   <servlet>
     <servlet-name>ERR</servlet-name>
     <servlet-class>com.zyt.view.ERR</servlet-class>
@@ -59,7 +56,16 @@
   <servlet-mapping>
     <servlet-name>ERR</servlet-name>
     <url-pattern>/ERR</url-pattern>
-  </servlet-mapping>    
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>UpdateUserView</servlet-name>
+    <servlet-class>com.zyt.view.UpdateUserView</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateUserView</servlet-name>
+    <url-pattern>/UpdateUserView</url-pattern>
+  </servlet-mapping>
   
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
